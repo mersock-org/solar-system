@@ -19,5 +19,16 @@ pipeline{
                 '''
             }
         }
+        stage("OWASP Dependencie check"){
+            steps{
+                sh '''
+                    dependencyCheck additionalArguments: ''' 
+                    -o './'
+                    -s './'
+                    -f 'ALL' 
+                    --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
+                '''
+            }
+        }
     }
 }
