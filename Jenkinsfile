@@ -32,7 +32,7 @@ pipeline{
 
                             dependencyCheckPublisher failedTotalCritical: 1, pattern: 'dependency-check-report.xml', stopBuild: false
                         
-                            publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: '', reportFiles: 'dependency-check-jenkins.html', reportName: 'Dependecy check R=report', reportTitles: '', useWrapperFileDirectly: true])
+                            publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: './', reportFiles: 'dependency-check-jenkins.html', reportName: 'Dependecy check report', reportTitles: '', useWrapperFileDirectly: true])
                     }
                 }
             }
