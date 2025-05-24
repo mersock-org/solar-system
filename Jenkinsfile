@@ -28,6 +28,7 @@ pipeline{
                             -o \'./\'
                             -s \'./\'
                             -f \'ALL\' 
+                            --disableYarnAudit
                             --prettyPrint''', odcInstallation: 'OWASP-DepCheck-10'
 
                             dependencyCheckPublisher failedTotalCritical: 1, pattern: 'dependency-check-report.xml', stopBuild: false
