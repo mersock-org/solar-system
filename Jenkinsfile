@@ -54,7 +54,7 @@ pipeline{
                             sh 'npm run coverage'
                      }
                 }
-                publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: 'coverage/lcov-report', reportFiles: 'index.htaml', reportName: 'Code coverrage HTML report', reportTitles: '', useWrapperFileDirectly: true])
+                publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: 'coverage/lcov-report', reportFiles: 'index.html', reportName: 'Code coverrage HTML report', reportTitles: '', useWrapperFileDirectly: true])
                 // junit allowEmptyResults: true, keepProperties: true, testResults: 'test-result.xml'                        
             }
         }
