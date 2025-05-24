@@ -16,7 +16,7 @@ pipeline{
         stage("Install Dependencies"){
             options { timestamps() }
             steps{
-                sh 'sleep 300s'
+                // sh 'sleep 300s'
                 sh 'npm install --no-audit'
             }
         }
