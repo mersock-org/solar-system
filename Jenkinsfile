@@ -34,6 +34,8 @@ pipeline{
                             dependencyCheckPublisher failedTotalCritical: 1, pattern: 'dependency-check-report.xml', stopBuild: false
                         
                             publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: './', reportFiles: 'dependency-check-jenkins.html', reportName: 'Dependecy check report', reportTitles: '', useWrapperFileDirectly: true])
+
+                            junit allowEmptyResults: true, keepProperties: true, testResults: 'dependency-check-junit.xml'
                     }
                 }
             }
