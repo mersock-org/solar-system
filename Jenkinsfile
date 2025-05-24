@@ -9,6 +9,7 @@ pipeline{
     }
     stages{
         stage("Install Dependencies"){
+            options { timestamps() }
             steps{
                 sh 'npm install --no-audit'
             }
@@ -40,6 +41,7 @@ pipeline{
             }
         }
         stage("Unit Testing"){
+            options { retry(2) }
             steps{
                 withCredentials([usernamePassword(credentialsId: 'mongo-db-cred', passwordVariable: 'MONGO_PASSWORD', usernameVariable: 'MONGO_USERNAME')]) {
                     sh 'npm test'
