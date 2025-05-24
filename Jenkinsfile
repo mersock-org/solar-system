@@ -47,10 +47,10 @@ pipeline{
             }
         }
         stage("Unit Testing"){
-            options { retry(2) }
+            // options { retry(2) }
             steps{
                 withCredentials([usernamePassword(credentialsId: 'mongo-db-cred', passwordVariable: 'MONGO_PASSWORD', usernameVariable: 'MONGO_USERNAME')]) {
-                    sh 'npm test'
+                    sh 'npm run coverage'
                 }
                 junit allowEmptyResults: true, keepProperties: true, testResults: 'test-result.xml'                        
             }
