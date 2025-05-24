@@ -7,8 +7,8 @@ pipeline{
     environment {
         MONGO_URI = "mongodb://mongo/superData"
         MONGO_DB_CRED = credentials('mongo-db-cred')
-        MONGO_USERNAME = credentials('mongo-db-username')
-        MONGO_PASSWORD = credentials('mongo-db-password')
+        MONGO_USERNAME = 'superuser'
+        MONGO_PASSWORD = 'superpass'
     }
     options {
     disableResume()
