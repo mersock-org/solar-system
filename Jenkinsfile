@@ -5,7 +5,8 @@ pipeline{
         nodejs "node-js-22-4-0"
     }
     environment {
-    MONGO_URI = "mongodb+srv://supercluster.d83jj.mongodb.net/superData"
+        MONGO_URI = "mongodb+srv://supercluster.d83jj.mongodb.net/superData"
+        MONGO_DB_CRED = credentials('mongo-db-cred')
     }
     options {
     disableResume()
@@ -49,9 +50,9 @@ pipeline{
         stage("Unit Testing"){
             options { retry(2) }
             steps{
-                withCredentials([usernamePassword(credentialsId: 'mongo-db-cred', passwordVariable: 'MONGO_PASSWORD', usernameVariable: 'MONGO_USERNAME')]) {
-                    sh 'npm test'
-                }
+                sh 'echo Username - $MONGO_DB_CRED_USR'
+                sh 'echo Password -  $MONGO_DB_CRED_PSW'
+                sh 'npm test'
                 junit allowEmptyResults: true, keepProperties: true, testResults: 'test-result.xml'                        
             }
         }
@@ -59,9 +60,7 @@ pipeline{
             options { retry(2) }
             steps{
                 catchError(message: 'Oops! It will be  fixed in future release', stageResult: 'UNSTABLE') {
-                    withCredentials([usernamePassword(credentialsId: 'mongo-db-cred', passwordVariable: 'MONGO_PASSWORD', usernameVariable: 'MONGO_USERNAME')]) {
-                            sh 'npm run coverage'
-                     }
+                    sh 'npm run coverage'
                 }
                 publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: 'coverage/lcov-report', reportFiles: 'index.html', reportName: 'Code coverrage HTML report', reportTitles: '', useWrapperFileDirectly: true])
             }
