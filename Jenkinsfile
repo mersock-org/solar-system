@@ -47,7 +47,16 @@ pipeline{
             }
         }
         stage("Unit Testing"){
-            // options { retry(2) }
+            options { retry(2) }
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'mongo-db-cred', passwordVariable: 'MONGO_PASSWORD', usernameVariable: 'MONGO_USERNAME')]) {
+                    sh 'npm test'
+                }
+                junit allowEmptyResults: true, keepProperties: true, testResults: 'test-result.xml'                        
+            }
+        }
+        stage("Code coverage"){
+            options { retry(2) }
             steps{
                 catchError(message: 'Oops! It will be  fixed in future release', stageResult: 'UNSTABLE') {
                     withCredentials([usernamePassword(credentialsId: 'mongo-db-cred', passwordVariable: 'MONGO_PASSWORD', usernameVariable: 'MONGO_USERNAME')]) {
@@ -55,7 +64,6 @@ pipeline{
                      }
                 }
                 publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: 'coverage/lcov-report', reportFiles: 'index.html', reportName: 'Code coverrage HTML report', reportTitles: '', useWrapperFileDirectly: true])
-                // junit allowEmptyResults: true, keepProperties: true, testResults: 'test-result.xml'                        
             }
         }
     }
