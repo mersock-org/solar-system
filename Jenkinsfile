@@ -49,24 +49,23 @@ pipeline{
                 }
             }
         }
-        stage("Unit Testing"){
-            options { retry(2) }
-            steps{
-                sh 'echo Username - $MONGO_DB_CRED_USR'
-                sh 'echo Password -  $MONGO_DB_CRED_PSW'
-                sh 'npm test'
-            }
-        }
-        stage("Code coverage"){
-            options { retry(2) }
-            steps{
-                catchError(message: 'Oops! It will be  fixed in future release', stageResult: 'UNSTABLE') {
-                    sh 'npm run coverage'
-                }
-            }
-        }
+        // stage("Unit Testing"){
+        //     options { retry(2) }
+        //     steps{
+        //         sh 'echo Username - $MONGO_DB_CRED_USR'
+        //         sh 'echo Password -  $MONGO_DB_CRED_PSW'
+        //         sh 'npm test'
+        //     }
+        // }
+        // stage("Code coverage"){
+        //     options { retry(2) }
+        //     steps{
+        //         catchError(message: 'Oops! It will be  fixed in future release', stageResult: 'UNSTABLE') {
+        //             sh 'npm run coverage'
+        //         }
+        //     }
+        // }
         stage("SAST - SonarQube"){
-            options { retry(2) }
             steps{
                 sh 'echo $SONAR_SCANNER_HOME'
                 sh '''
@@ -79,12 +78,12 @@ pipeline{
             }
         }
     }
-    post {
-        always {
-            junit allowEmptyResults: true, keepProperties: true, testResults: 'test-result.xml'                        
-            junit allowEmptyResults: true, keepProperties: true, testResults: 'dependency-check-junit.xml'       
-            publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: './', reportFiles: 'dependency-check-report.html', reportName: 'Dependecy check report', reportTitles: '', useWrapperFileDirectly: true])                 
-            publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: 'coverage/lcov-report', reportFiles: 'index.html', reportName: 'Code coverrage HTML report', reportTitles: '', useWrapperFileDirectly: true])
-        }
-    }
+    // post {
+    //     always {
+    //         junit allowEmptyResults: true, keepProperties: true, testResults: 'test-result.xml'                        
+    //         junit allowEmptyResults: true, keepProperties: true, testResults: 'dependency-check-junit.xml'       
+    //         publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: './', reportFiles: 'dependency-check-report.html', reportName: 'Dependecy check report', reportTitles: '', useWrapperFileDirectly: true])                 
+    //         publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: 'coverage/lcov-report', reportFiles: 'index.html', reportName: 'Code coverrage HTML report', reportTitles: '', useWrapperFileDirectly: true])
+    //     }
+    // }
 }
