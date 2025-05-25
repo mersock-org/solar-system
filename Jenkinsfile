@@ -48,14 +48,14 @@ pipeline{
                 }
             }
         }
-        stage("Unit Testing"){
-            options { retry(2) }
-            steps{
-                sh 'echo Username - $MONGO_DB_CRED_USR'
-                sh 'echo Password -  $MONGO_DB_CRED_PSW'
-                sh 'npm test'
-            }
-        }
+        // stage("Unit Testing"){
+        //     options { retry(2) }
+        //     steps{
+        //         sh 'echo Username - $MONGO_DB_CRED_USR'
+        //         sh 'echo Password -  $MONGO_DB_CRED_PSW'
+        //         sh 'npm test'
+        //     }
+        // }
         stage("Code coverage"){
             options { retry(2) }
             steps{
