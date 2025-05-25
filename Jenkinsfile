@@ -9,6 +9,7 @@ pipeline{
         MONGO_DB_CRED = credentials('mongo-db-cred')
         MONGO_USERNAME = 'superuser'
         MONGO_PASSWORD = 'superpass'
+        SONAR_SCANNER_HOME = tool 'sonarqube-scanner-7.1.0'
     }
     options {
     disableResume()
@@ -62,6 +63,19 @@ pipeline{
                 catchError(message: 'Oops! It will be  fixed in future release', stageResult: 'UNSTABLE') {
                     sh 'npm run coverage'
                 }
+            }
+        }
+        stage("SAST - SonarQube"){
+            options { retry(2) }
+            steps{
+                sh 'echo $SONAR_SCANNER_HOME'
+                sh '''
+                $SONAR_SCANNER_HOME/bin/sonar-scanner \
+                    -Dsonar.projectKey=solar-system-project \
+                    -Dsonar.sources=app.js \
+                    -Dsonar.host.url=http://sonarqube:9000 \
+                    -Dsonar.token=sqp_7809736098cd5294823078d8a45b2b60221e7fa3
+                '''
             }
         }
     }
