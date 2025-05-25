@@ -5,7 +5,7 @@ pipeline{
         nodejs "node-js-22-4-0"
     }
     environment {
-        MONGO_URI = "mongodb://mongo/superData"
+        MONGO_URI = "mongodb://mongo:27017/superData"
         MONGO_DB_CRED = credentials('mongo-db-cred')
         MONGO_USERNAME = 'superuser'
         MONGO_PASSWORD = 'superpass'
@@ -49,14 +49,14 @@ pipeline{
                 }
             }
         }
-        // stage("Unit Testing"){
-        //     options { retry(2) }
-        //     steps{
-        //         sh 'echo Username - $MONGO_DB_CRED_USR'
-        //         sh 'echo Password -  $MONGO_DB_CRED_PSW'
-        //         sh 'npm test'
-        //     }
-        // }
+        stage("Unit Testing"){
+            options { retry(2) }
+            steps{
+                sh 'echo Username - $MONGO_DB_CRED_USR'
+                sh 'echo Password -  $MONGO_DB_CRED_PSW'
+                sh 'npm test'
+            }
+        }
         // stage("Code coverage"){
         //     options { retry(2) }
         //     steps{
