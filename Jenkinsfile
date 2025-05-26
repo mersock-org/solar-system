@@ -84,10 +84,9 @@ pipeline{
         stage("Docker Build"){
             steps{
                 sh 'printenv'
-                script {
-                    dockerImage = docker.build("mersock/solar-system:$GIT_COMMIT")
-                }
-                }
+                script{
+                     dockerImage = docker.build("mersock/solar-system:$GIT_COMMIT")
+                }   
             }
         }
     }
