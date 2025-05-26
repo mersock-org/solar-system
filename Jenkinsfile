@@ -84,7 +84,7 @@ pipeline{
         stage("Docker Build"){
             steps{
                 sh 'printenv'
-                withDockerServer([]) {
+                withDockerServer([uri: 'unix:///var/run/docker.sock']) {
                     sh 'docker build -t mersock/solar-system:$GIT_COMMIT .'
                 }
             }
