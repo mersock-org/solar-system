@@ -3,7 +3,7 @@ pipeline{
     tools {
         // Install the NodeJS version configured as "node-js-22-4-0" and add it to the path.
         nodejs "node-js-22-4-0"
-        กocker "docker-default"
+        docker "docker-default"
     }
     environment {
         MONGO_URI = "mongodb://mongo:27017/superData"
