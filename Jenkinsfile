@@ -80,7 +80,7 @@ pipeline{
     }
     post {
         always {
-            junit allowEmptyResults: true, keepProperties: true, testResults: 'test-result.xml'                        
+            // junit allowEmptyResults: true, keepProperties: true, testResults: 'test-result.xml'                        
             junit allowEmptyResults: true, keepProperties: true, testResults: 'dependency-check-junit.xml'       
             publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: './', reportFiles: 'dependency-check-report.html', reportName: 'Dependecy check report', reportTitles: '', useWrapperFileDirectly: true])                 
             publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: 'coverage/lcov-report', reportFiles: 'index.html', reportName: 'Code coverrage HTML report', reportTitles: '', useWrapperFileDirectly: true])
