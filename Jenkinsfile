@@ -49,11 +49,11 @@ pipeline{
                 }
             }
         }
-        stage("Unit Testing"){
+        stage("Unit Testing E2E"){
             options { retry(2) }
             steps{
                 catchError(message: 'Oops! It will be  fixed in future release', stageResult: 'UNSTABLE') {
-                    sh 'npm test'
+                    sh 'npm run test:e2e'
                 }
             }
         }
@@ -61,7 +61,7 @@ pipeline{
             options { retry(2) }
             steps{
                 catchError(message: 'Oops! It will be  fixed in future release', stageResult: 'UNSTABLE') {
-                    sh 'npm run coverage'
+                    sh 'npm run test'
                 }
             }
         }
