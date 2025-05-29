@@ -5,10 +5,6 @@ pipeline{
         nodejs "node-js-22-4-0"
     }
     environment {
-        MONGO_URI = "mongodb://mongo:27017/superData"
-        MONGO_DB_CRED = credentials('mongo-db-cred')
-        MONGO_USERNAME = credentials('mongo-db-username')
-        MONGO_PASSWORD = credentials('mongo-db-password')
         SONAR_SCANNER_HOME = tool 'sonarqube-scanner-7.1.0'
     }
     options {
@@ -50,19 +46,13 @@ pipeline{
             }
         }
         stage("Unit Testing E2E"){
-            options { retry(2) }
             steps{
-                catchError(message: 'Oops! It will be  fixed in future release', stageResult: 'UNSTABLE') {
                     sh 'npm run test:e2e'
                 }
-            }
         }
         stage("Code coverage"){
-            options { retry(2) }
             steps{
-                catchError(message: 'Oops! It will be  fixed in future release', stageResult: 'UNSTABLE') {
                     sh 'npm run test'
-                }
             }
         }
         stage("SAST - SonarQube"){
