@@ -1,49 +1,33 @@
-# Solar System NodeJS Application
+# express-app-testing-demo
 
-A simple HTML+MongoDB+NodeJS project to display Solar System and it's planets.
+This project is a simple express app for demonstrating testing and code coverage.
+[Jest](https://facebook.github.io/jest/) and
+[Supertest](https://github.com/visionmedia/supertest) are used for testing.
+Jest is also used for mocking functions and measuring code coverage.
+Note that this app only focuses on server-side JavaScript testing.
 
----
+
 ## Requirements
 
-For development, you will only need Node.js and NPM installed in your environement.
+* Node.js - [https://nodejs.org/](https://nodejs.org/)
 
-### Node
-- #### Node installation on Windows
 
-  Just go on [official Node.js website](https://nodejs.org/) and download the installer.
-Also, be sure to have `git` available in your PATH, `npm` might need it (You can find git [here](https://git-scm.com/)).
+## Getting Started
 
-- #### Node installation on Ubuntu
+* Clone the repo
+* Install dependencies with `npm install`
+* Run server with `npm start` and go here:
+[http://localhost:3000/](http://localhost:3000/)
 
-  You can install nodejs and npm easily with apt install, just run the following commands.
 
-      $ sudo apt install nodejs
-      $ sudo apt install npm
+## Running Tests
 
-- #### Other Operating Systems
-  You can find more information about the installation on the [official Node.js website](https://nodejs.org/) and the [official NPM website](https://npmjs.org/).
+* Run unit and integration tests: `npm test`
+* Run end-to-end tests: `npm run test:e2e`
 
-If the installation was successful, you should be able to run the following command.
+## Code Coverage Report
 
-    $ node --version
-    v8.11.3
-
-    $ npm --version
-    6.1.0
-
----
-## Install Dependencies from `package.json`
-    $ npm install
-
-## Run Unit Testing
-    $ npm test
-
-## Run Code Coverage
-    $ npm run coverage
-
-## Run Application
-    $ npm start
-
-## Access Application on Browser
-    http://localhost:3000/
-
+A new code coverage report is generated every time `npm test` runs.
+Normally this coverage report is ignored by git.
+This project includes it in source control so the coverage report can be viewed in the demo app:
+[http://express-app-testing-demo.herokuapp.com/coverage/lcov-report/index.html](http://express-app-testing-demo.herokuapp.com/coverage/lcov-report/index.html)
