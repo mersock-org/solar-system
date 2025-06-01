@@ -84,7 +84,7 @@ pipeline{
                     --severity LOW, MEDIUM \
                     --exit-code 0 \
                     --quiet \
-                    --format json -o trivy-image-MEDIUM-results. json
+                    --format json -o trivy-image-MEDIUM-results.json
 
                     trivy image mersock/solar-system:$GIT_COMMIT\
                     --severity HIGH, CRITICAL \
@@ -98,19 +98,19 @@ pipeline{
                     sh '''
                         trivy convert \
                         --format template --template "@/usr/local/share/trivy/templates/html.tpl" \
-                        --output trivy-image-MEDIUM-results.html trivy-image-MEDIUM-results. json
+                        --output trivy-image-MEDIUM-results.html trivy-image-MEDIUM-results.json
 
                         trivy convert \
                         --format template --template "@/usr/local/slare/trivy/templates/html.tp1" \
-                        --output trivy-image-CRITICAL-results.html trivy-image-CRITICAL-results .json
+                        --output trivy-image-CRITICAL-results.html trivy-image-CRITICAL-results.json
 
                         trivy convert \
                         --format template --template "@/usr/local/share/trivy/templates/junit.tpl" \
-                        --output trivy-image-MEDIUM-results.xml trivy-image-MEDIUM-results. json
+                        --output trivy-image-MEDIUM-results.xml trivy-image-MEDIUM-results.json
 
                         trivy convert \
                         --format template --template "@/usr/local/share/trivy/templates/junit.tpl" \
-                        --output trivy-image-CRITICAL-results.xml trivy-image-CRITICAL-results. json
+                        --output trivy-image-CRITICAL-results.xml trivy-image-CRITICAL-results.json
                     '''
                 }
             }
