@@ -81,6 +81,8 @@ pipeline{
         stage("Trivy Vulnerability Scanner"){
             steps{
                 sh '''
+                    trivy -v
+
                     trivy image mersock/solar-system:$GIT_COMMIT \
                     --severity LOW, MEDIUM \
                     --exit-code 0 \
