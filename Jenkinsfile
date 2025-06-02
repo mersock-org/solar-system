@@ -101,7 +101,7 @@ pipeline{
                         --output trivy-image-MEDIUM-results.html trivy-image-MEDIUM-results.json
 
                         trivy convert \
-                        --format template --template "@/usr/local/share/trivy/templates/html.tp1" \
+                        --format template --template "@/usr/local/share/trivy/templates/html.tpl" \
                         --output trivy-image-CRITICAL-results.html trivy-image-CRITICAL-results.json
 
                         trivy convert \
