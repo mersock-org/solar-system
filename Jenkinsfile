@@ -80,7 +80,7 @@ pipeline{
         stage("Trivy Vulnerability Scanner"){
             steps{
                 sh '''
-                    trivy image --severity LOW, MEDIUM \
+                    trivy image --severity LOW,MEDIUM \
                     --exit-code 0 \
                     --quiet \
                     --format json -o trivy-image-MEDIUM-results.json \
