@@ -75,6 +75,7 @@ pipeline{
             steps{
                 sh 'printenv'
                 sh 'docker build -t mersock/solar-system:$GIT_COMMIT .'
+                sh 'docker save mersock/solar-system:$GIT_COMMIT > image.tar'
             }
         }
         stage("Trivy Vulnerability Scanner"){
@@ -84,13 +85,17 @@ pipeline{
                     --severity LOW, MEDIUM \
                     --exit-code 0 \
                     --quiet \
+                    --input image.tar \
                     --format json -o trivy-image-MEDIUM-results.json
 
                     trivy image mersock/solar-system:$GIT_COMMIT\
                     --severity HIGH, CRITICAL \
                     --exit-code 1 \
                     --quiet \
+                    --input image.tar \
                     --format json -o trivy-image-CRITICAL-results.json
+
+                    rm -rf image.tar
                 '''
             }
             // post{
