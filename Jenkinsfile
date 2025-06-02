@@ -80,7 +80,7 @@ pipeline{
         }
         stage("Trivy Vulnerability Scanner"){
             steps{
-                sh 'trivy image mersock/solar-system:$GIT_COMMIT --severity LOW, MEDIUM '
+                sh 'trivy image --severity LOW, MEDIUM  mersock/solar-system:$GIT_COMMIT'
                 // sh '''
                 //     trivy -v
 
