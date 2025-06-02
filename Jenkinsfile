@@ -80,13 +80,13 @@ pipeline{
         stage("Trivy Vulnerability Scanner"){
             steps{
                 sh '''
-                    trivy image --severity LOW,MEDIUM \
+                    trivy image --severity LOW,MEDIUM,HIGH \
                     --exit-code 0 \
                     --quiet \
                     --format json -o trivy-image-MEDIUM-results.json \
                     mersock/solar-system:$GIT_COMMIT
 
-                    trivy image --severity HIGH,CRITICAL \
+                    trivy image --severity CRITICAL \
                     --exit-code 1 \
                     --quiet \
                     --format json -o trivy-image-CRITICAL-results.json \
