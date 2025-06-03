@@ -115,6 +115,13 @@ pipeline{
                 }
             }
         }
+        stage("Pusht Docker Image"){
+            steps{
+                withDockerRegistry(credentialsId: 'docker-mersock-cred') {
+                    sh 'docker push mersock/solar-system:$GIT_COMMIT'
+                }
+            }
+        }
     }
     post {
         always {
