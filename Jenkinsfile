@@ -117,7 +117,7 @@ pipeline{
         }
         stage("Pusht Docker Image"){
             steps{
-                withDockerRegistry(credentialsId: 'docker-mersock-cred') {
+                withDockerRegistry(credentialsId: 'docker-mersock-cred',url:"") {
                     sh 'docker push mersock/solar-system:$GIT_COMMIT'
                 }
             }
